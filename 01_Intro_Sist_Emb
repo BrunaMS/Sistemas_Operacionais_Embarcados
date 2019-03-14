@@ -1,0 +1,22 @@
+1. O que são sistemas embarcados?
+Sistemas criados para um objetivo específico e que podem ou não fazer parte de um sistema maior.
+
+2. O que são sistemas microprocesssados?
+Sistemas nos quais o computador é completamente dedicado ao sistema que ele controla, cumprindo um conjunto de requisitos e tarefas pré-definidas.
+
+3. Apresente aplicações de sistemas embarcados: 
+(a) Para a indústria automotiva: Sistema de medição e visualização do nível da gasolina e airbags.
+(b) Para eletrodomésticos: Roteadores Wi-Fi, controle de iluminação automático, calculadores.
+(c) Para automação industrial: Sistema de GPS e rastreamento de veículos de carga.
+
+4. Cite arquiteturas possíveis e as diferenças entre elas.
+- Microcontroladores: Circuito integrado que possui um microprocessador e periféricos (entradas e saídas analógicas e digitais, bluetooth, USB), que dependem do modelo utilizado.
+- GPPs: Costuma ter um foco no software, ser menor e de mais baixo custo que os demais, podendo ser usado para uma gama de finalidades diferentes.
+- DSPs: Especializados e muito utilizado para o processamento digital de sinais, imagens e vídeo, tendo propostas consideravelmente boas para o cancelamento de ruídos, por exemplo.
+- FPGAs - Circuito Integrado construído de forma "reconfigurável", sendo projetado para ser configurado depois do processo de fabricação.
+- ASICs	-	Circuitos projetados diretamente para funções específicas, ou seja, exatamente o inverso de GPPs (processadores de propósito geral)
+- SoCs	-	Quaisquer componentes de um sistema eletrônico (como um computador, por exemplo) inclusos em um circuito integrado (CI).
+- MPSoCs - SoCs capazes de realizar diversas tarefas ao mesmo tempo, ou pelo menos em intervalos extremamente pequenos e imperceptíveis.
+
+5. Por que usamos o Raspberry Pi na disciplina, ao invés de outro system-on-chip?
+Pela possibilidade de ter um sistema operacional próprio, pela adição opcional de memória externa e por ser bem mais completo, podendo possuir saídas HDMI, entradas USB, cartão de memória e saídas de áudio.
