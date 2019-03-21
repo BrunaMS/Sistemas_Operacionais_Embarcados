@@ -1,23 +1,23 @@
-Por que o Linux recebeu esse nome?
+1. Por que o Linux recebeu esse nome?
 Porque o nome do criador do sistema é Linus Torvalds e por ser um sistema
  variante do Unix
  
-O que são daemons? 
+2. O que são daemons? 
 Usuários que não são o principal (administrador) e que, geralmente, não possuem as mesmas permissões do mesmo 
 
-O que é o shell? 
+3. O que é o shell? 
 O que conecta o usuário ao kernel.
 
-Por que é importante evitar executar o terminal como super-usuário?
+4. Por que é importante evitar executar o terminal como super-usuário?
 Para evitar que problemas ocasionados por erros ou imprevistos sejam causados, visto que o mesmo tem permissões para alterar qauisquer coisas do sistema.
 
-Qual botão do teclado completa o que o usuário escreve no terminal, de acordo com o contexto?
+5. Qual botão do teclado completa o que o usuário escreve no terminal, de acordo com o contexto?
 TAB
 
-Quais botões do teclado apresentam instruções escritas anteriormente?
+6. Quais botões do teclado apresentam instruções escritas anteriormente?
 tecla para cima (up).
 
-Apresente os respectivos comandos no terminal para: 
+7. Apresente os respectivos comandos no terminal para: 
 (a) Obter mais informações sobre um comando: man
 (b) Apresentar uma lista com os arquivos dentro de uma pasta: ls
 (c) Apresentar o caminho completo da pasta: pwd 
