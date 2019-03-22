@@ -30,13 +30,13 @@ for i in $@
 
 do
 
-  if[n -eq 0]; then
+  if[$n -eq 0]; then
   
     args = $i
     
     n = 1
     
-  elif [n -eq 1]; then
+  elif [$n -eq 1]; then
   
     cal $args $i
     
