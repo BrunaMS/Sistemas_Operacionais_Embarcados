@@ -23,16 +23,27 @@ Não limite o script a 3 meses. Ele deve funcionar para vários casos, como por 
 Utilizando a lógica do script anterior, descubra em que dia da semana caiu o seu aniversário nos últimos dez anos.
 
 n=0
+
 args=""
+
 for i in $@
+
 do
+
   if[n -eq 0]; then
+  
     args = $i
+    
     n = 1
+    
   elif [n -eq 1]; then
+  
     cal $args $i
+    
     n=0
+    
   fi
+  
 done
 
 
