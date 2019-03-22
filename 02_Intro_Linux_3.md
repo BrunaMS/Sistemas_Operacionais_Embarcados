@@ -22,29 +22,29 @@ Não limite o script a 3 meses. Ele deve funcionar para vários casos, como por 
 ./cals.sh 1 2019 2 2020 3 2021 1 2010
 Utilizando a lógica do script anterior, descubra em que dia da semana caiu o seu aniversário nos últimos dez anos.
 
-n=0
+$n=0
 
-args=""
+$args=""
 
-for i in $@
+$for i in $@
 
-do
+$do
 
-  if[$n -eq 0]; then
+$  if[$n -eq 0]; then
   
-    args = $i
+$    args = $i
     
-    n = 1
+$    n = 1
     
-  elif [$n -eq 1]; then
+$  elif [$n -eq 1]; then
   
-    cal $args $i
+$    cal $args $i
     
-    n=0
+$    n=0
     
-  fi
+$  fi
   
-done
+$done
 
 
 3. Crie um arquivo sites.txt com o seguinte conteúdo:
