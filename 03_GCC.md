@@ -94,6 +94,24 @@ Olá Ola!
 $ ./ola_usuario_2 Eu
 $ Ola Eu
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (int argc, char *argv[])
+{
+	int i=1;
+	
+	printf("Olá");
+	do{
+			printf(" %s", argv[i]);
+			
+			if(i==(argc-1))
+				printf("!\n");
+ 			i++;
+	}while(i<=argc-1);
+}
+
+
 
 5. Apresente os comportamentos do código anterior nos seguintes casos:
 
@@ -101,26 +119,38 @@ $ Ola Eu
 
 $ ./ola_usuario_2 Eu Mesmo
 
+$ Olá Eu Mesmo!
+
 (b) Se o usuário insere mais de um nome entre aspas duplas. Por exemplo:
 
 $ ./ola_usuario_2 "Eu Mesmo"
+
+$ Olá Eu Mesmo!
 
 (c) Se é usado um pipe. Por exemplo:
 
 $ echo Eu | ./ola_usuario_2
 
+Olá (null)
+
 (d) Se é usado um pipe com mais de um nome. Por exemplo:
 
 $ echo Eu Mesmo | ./ola_usuario_2
+
+Olá (null)
 
 (e) Se é usado um pipe com mais de um nome entre aspas duplas. Por exemplo:
 
 $ echo Eu Mesmo | ./ola_usuario_2
 
+Olá (null)
+
 (f) Se é usado o redirecionamento de arquivo. Por exemplo:
 
 $ echo Ola mundo cruel! > ola.txt
 $ ./ola_usuario_2 < ola.txt
+
+Olá (null)
 
 6. Crie um código em C que faz o mesmo que o código da questão 4, e em seguida imprime no terminal quantos valores de entrada foram fornecidos pelo usuário. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_3':
 
@@ -128,10 +158,48 @@ $ ./ola_usuario_3 Eu
 $ Ola Eu
 $ Numero de entradas = 2
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (int argc, char *argv[])
+{
+	int i=1;
+	
+	printf("Olá");
+	do{
+			printf(" %s", argv[i]);
+			
+			if(i==(argc-1))
+				printf("!\n");
+ 			i++;
+	}while(i<=argc-1);
+	printf("\nNúmero de entradas: %d \n", argc);
+}
+
+
 7. Crie um código em C que imprime todos os argumentos de entrada fornecidos pelo usuário. Por exemplo, considerando que o código criado recebeu o nome de 'ola_argumentos':
 
 $ ./ola_argumentos Eu Mesmo e Minha Pessoa
 $ Argumentos: Eu Mesmo e Minha Pessoa
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (int argc, char *argv[])
+{
+	int i=1;
+	
+	printf("Argumentos: ");	
+	do{
+			printf("%s ", argv[i]);
+			
+			if(i==(argc-1))
+				printf("\n");
+ 			i++;
+	}while(i<=argc-1);
+}
+
 
 8. Crie uma função que retorna a quantidade de caracteres em uma string, usando o seguinte protótipo: int Num_Caracs(char *string); Salve-a em um arquivo separado chamado 'num_caracs.c'. Salve o protótipo em um arquivo chamado 'num_caracs.h'. Compile 'num_caracs.c' para gerar o objeto 'num_caracs.o'.
 
