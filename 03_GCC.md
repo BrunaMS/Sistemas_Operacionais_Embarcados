@@ -204,6 +204,48 @@ int main (int argc, char *argv[])
 8. Crie uma função que retorna a quantidade de caracteres em uma string, usando o seguinte protótipo: int Num_Caracs(char *string); Salve-a em um arquivo separado chamado 'num_caracs.c'. Salve o protótipo em um arquivo chamado 'num_caracs.h'. Compile 'num_caracs.c' para gerar o objeto 'num_caracs.o'.
 
 
+main.c:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "num_caracs.h"
+
+int main (int argc, char **argv)
+{
+	int i, qntd=0;
+
+	for(i=1;i<(argc);i++)
+	{
+		qntd+= Num_Caracs(argv[i]);
+	}
+	
+	printf("Número de caracteres: %d\n", qntd);
+
+
+}
+
+
+
+num_caracs.h:
+
+int Num_Caracs(char *string);
+
+
+
+num_caracs.c:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "num_caracs.h"
+
+int Num_Caracs(char *string)
+{
+	int size;	
+	size = strlen(string);
+	return size;
+}
+
 9. Re-utilize o objeto criado na questão 8 para criar um código que imprime cada argumento de entrada e a quantidade de caracteres de cada um desses argumentos. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_1':
 
 $ ./ola_num_caracs_1 Eu Mesmo
@@ -211,11 +253,11 @@ $ Argumento: ./ola_num_caracs_1 / Numero de caracteres: 18
 $ Argumento: Eu / Numero de caracteres: 2
 $ Argumento: Mesmo / Numero de caracteres: 5
 
-7. Crie um Makefile para a questão anterior.
+10. Crie um Makefile para a questão anterior.
 
-8. Re-utilize o objeto criado na questão 8 para criar um código que imprime o total de caracteres nos argumentos de entrada. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_2':
+11. Re-utilize o objeto criado na questão 8 para criar um código que imprime o total de caracteres nos argumentos de entrada. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_2':
 
 $ ./ola_num_caracs_2 Eu Mesmo
 $ Total de caracteres de entrada: 25
 
-9. Crie um Makefile para a questão anterior.
+12. Crie um Makefile para a questão anterior.
