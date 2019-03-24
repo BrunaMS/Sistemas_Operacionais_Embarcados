@@ -1,17 +1,13 @@
 ### Para todas as questões, escreva os scripts e as chamadas correspondentes no terminal.
 
 ### 1. Crie um arquivo com nome teste1.txt, e escreva nele o texto "Número do arquivo = 1". Repita o procedimento para os arquivos teste2.txt, teste3.txt, ..., teste100.txt, escrevendo o texto correspondente para cada um deles ("Número do arquivo = 2", "Número do arquivo = 3", ..., "Número do arquivo = 100").
-
-$ #!/bin/bash
-
-$ for i in {1..100}
-
-$ do
-
-$ echo "Numero do arquivo = $i" > test$i.txt
-
-$ done
-
+```bash
+#!/bin/bash
+for i in {1..100}
+do
+echo "Numero do arquivo = $i" > test$i.tx
+done
+```
 
 ### 2. Faça um script chamado cals.sh que apresente o calendário de vários meses indicados pelo usuário, usando o seguinte formato:
 ```bash
