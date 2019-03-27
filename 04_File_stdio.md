@@ -4,15 +4,14 @@ Para todas as questões, utilize as funções da biblioteca `stdio.h` de leitura
 
 ```C
 #include <stdio.h>
-#include <stdlib.h>
 
-int main(void)
-{
-	char nome[20];
+int main(){
 
-	printf("Como você se chama?\n");
-	scanf("%s", nome);
-	printf("Olá %s! \n", nome);
+FILE *fp;
+
+fp = fopen("ola_mundo.txt","w" );
+fputs("Olá mundo!\n",fp);
+fclose(fp);
 }
 ```
 
