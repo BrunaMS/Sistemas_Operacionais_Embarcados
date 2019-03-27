@@ -26,6 +26,31 @@ $ Nome: Eu
 $ Idade: 30 anos
 ```
 
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main(){
+
+FILE *fp;
+char nome[50]="", idade[20]="";
+
+fp = fopen("nome_idade.txt","w+" );
+printf("Digite seu nome:\n");
+scanf("%s",nome);
+printf("Digite sua idade:\n");
+scanf("%s", idade);
+fputs("Nome:",fp);
+fputs(nome,fp);
+fputs("\nIdade:",fp);
+fputs(idade,fp);
+fputs(" anos\n",fp);
+fclose(fp);
+}
+```
+
 3. Crie um código em C que recebe o nome do usuário e e sua idade como argumentos de entrada (usando as variáveis `argc` e `*argv[]`), e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_2':
 
 ```bash
