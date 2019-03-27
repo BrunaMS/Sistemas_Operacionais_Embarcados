@@ -2,6 +2,20 @@ Para todas as questões, utilize as funções da biblioteca `stdio.h` de leitura
 
 1. Crie um código em C para escrever "Ola mundo!" em um arquivo chamado 'ola_mundo.txt'.
 
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+	char nome[20];
+
+	printf("Como você se chama?\n");
+	scanf("%s", nome);
+	printf("Olá %s! \n", nome);
+}
+```
+
 2. Crie um código em C que pergunta ao usuário seu nome e sua idade, e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_1':
 
 ```bash
