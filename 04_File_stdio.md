@@ -147,13 +147,6 @@ int tam_arq_texto(char *nome_arquivo);
 
 5. Crie uma função que lê o conteúdo de um arquivo-texto e o guarda em uma string, usando o seguinte protótipo: `char* le_arq_texto(char *nome_arquivo);` Repare que o conteúdo do arquivo é armazenado em um vetor interno à função, e o endereço do vetor é retornado ao final. (Se você alocar este vetor dinamicamente, lembre-se de liberar a memória dele quando acabar o seu uso). Salve esta função no mesmo arquivo da questão 4, chamado 'bib_arqs.c'. Salve o protótipo no arquivo 'bib_arqs.h'. Compile 'bib_arqs.c' novamente para gerar o objeto 'bib_arqs.o'.
 
-6. Crie um código em C que copia a funcionalidade básica do comando `cat`: escrever o conteúdo de um arquivo-texto no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'cat_falsificado':
-
-```bash
-$ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
-$ ./cat_falsificado ola.txt
-$ Ola mundo cruel! Ola universo ingrato!
-```
 ------------------- NÃO TERMINADO -----------------------
 ```C
 #include <stdio.h>
@@ -182,11 +175,20 @@ char* le_arq_texto(char *nome_arquivo)
 	int i;
 	
 	while((string = gets(arquivo) ) != EOF) 
-	 printf("%s", c); /* imprime o caracter lido */
+	 printf("%s", string); /* imprime o caracter lido */
  	fclose(arquivo); 
 
 }
 ```
+
+6. Crie um código em C que copia a funcionalidade básica do comando `cat`: escrever o conteúdo de um arquivo-texto no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'cat_falsificado':
+
+```bash
+$ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
+$ ./cat_falsificado ola.txt
+$ Ola mundo cruel! Ola universo ingrato!
+```
+
 
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
 
