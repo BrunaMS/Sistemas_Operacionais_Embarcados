@@ -59,8 +59,7 @@ $ cat Eu.txt
 $ Nome: Eu
 $ Idade: 30 anos
 ```
-
----------------Não terminado------------
+```C
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -69,11 +68,15 @@ $ Idade: 30 anos
 int main(int argc, const char * argv[]){
 
 FILE *fp;
-char nome[50]="", idade[20]="";
+char nome[50]="";
+char idade[20]="";
+char file[55]="";
 
-fp = fopen("arg_nome.txt","w+" );
-strcpy(nome,argc[1]);
-strcpy(idade, argc[2]);
+strcpy(nome, argv[1]);
+strcpy(file, argv[1]);
+strcpy(idade, argv[2]);
+strcat(file, ".txt");
+fp = fopen(file,"w+" );
 fputs("Nome:",fp);
 fputs(nome,fp);
 fputs("\nIdade:",fp);
@@ -81,10 +84,65 @@ fputs(idade,fp);
 fputs(" anos\n",fp);
 fclose(fp);
 }
+```
 
 
+4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado '.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.
+*Main.c:*
 
-4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado 'bib_arqs.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include "bib_arqs.h"
+
+int main()
+{
+	int tamanho=0;
+	char arquivo[50];
+	printf("Digite o nome do arquivo que você deseja saber o tamanho (em Bytes):");
+	scanf("%s", arquivo);
+	tamanho = tam_arq_texto(arquivo);
+	printf("O arquivo %s contém %d Bytes\n", arquivo, tamanho);
+return 0;
+}
+```
+*bib_arqs.c:*
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int tam_arq_texto(char *nome_arquivo)
+{
+	int tamanho=0;
+	FILE *arquivo;
+	
+	arquivo = fopen(nome_arquivo, "r");
+	fseek(arquivo, 0, SEEK_END);
+	tamanho = ftell(arquivo);
+	fclose(arquivo);
+	return tamanho;
+}
+```
+*Makefile:*
+```C
+bib_arqs:  main.o bib_arqs.o
+	gcc $(CFLAGS) -o bib_arqs main.o bib_arqs.o
+main.o: bib_arqs.c bib_arqs.h
+	gcc $(CFLAGS) -c main.c
+reciprocal.o: bib_arqs.c bib_arqs.h
+	gcc $(CFLAGS) -c bib_arqs.c
+clean:
+	rm -f *.o bib_arqs
+```
+
+*bib_arqs.h*
+```C
+int tam_arq_texto(char *nome_arquivo);
+```
+
 
 5. Crie uma função que lê o conteúdo de um arquivo-texto e o guarda em uma string, usando o seguinte protótipo: `char* le_arq_texto(char *nome_arquivo);` Repare que o conteúdo do arquivo é armazenado em um vetor interno à função, e o endereço do vetor é retornado ao final. (Se você alocar este vetor dinamicamente, lembre-se de liberar a memória dele quando acabar o seu uso.) Salve esta função no mesmo arquivo da questão 4, chamado 'bib_arqs.c'. Salve o protótipo no arquivo 'bib_arqs.h'. Compile 'bib_arqs.c' novamente para gerar o objeto 'bib_arqs.o'.
 
