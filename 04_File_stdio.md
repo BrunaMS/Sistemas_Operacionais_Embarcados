@@ -88,7 +88,8 @@ fclose(fp);
 
 
 4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado '.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.
-*Main.c:*
+
+**Main.c:**
 
 ```C
 #include <stdio.h>
@@ -106,7 +107,7 @@ int main()
 return 0;
 }
 ```
-*bib_arqs.c:*
+**bib_arqs.c:**
 
 ```C
 #include <stdio.h>
@@ -126,7 +127,7 @@ int tam_arq_texto(char *nome_arquivo)
 	return tamanho;
 }
 ```
-*Makefile:*
+**Makefile:**
 ```C
 bib_arqs:  main.o bib_arqs.o
 	gcc $(CFLAGS) -o bib_arqs main.o bib_arqs.o
@@ -138,7 +139,7 @@ clean:
 	rm -f *.o bib_arqs
 ```
 
-*bib_arqs.h*
+**bib_arqs.h**
 ```C
 int tam_arq_texto(char *nome_arquivo);
 ```
