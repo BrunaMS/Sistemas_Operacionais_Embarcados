@@ -181,6 +181,8 @@ char* le_arq_texto(char *nome_arquivo)
 }
 ```
 
+
+
 6. Crie um código em C que copia a funcionalidade básica do comando `cat`: escrever o conteúdo de um arquivo-texto no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'cat_falsificado':
 
 ```bash
@@ -188,8 +190,34 @@ $ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
 $ ./cat_falsificado ola.txt
 $ Ola mundo cruel! Ola universo ingrato!
 ```
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+----------------------------- Não terminado -------------------------
+```C
+int main(int argc, const char * argv[])
+{
+	FILE *fp;
+	char arq[200];
 
 
+	fp = fopen(argv[1], "r");
+
+        if (!fp)
+        printf ("Erro na abertura do arquivo.");
+	else{
+	fseek(arquivo, 0, SEEK_SET);
+	while((string = gets(arquivo) ) != EOF) 
+	 printf("%s", string); /* imprime o caracter lido */
+ 	fclose(arquivo); 	
+}
+
+	
+
+
+return 0
+}
+```
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
 
 ```bash
