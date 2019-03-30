@@ -154,30 +154,27 @@ int tam_arq_texto(char *nome_arquivo);
 #include <stdlib.h>
 
 
-int tam_arq_texto(char *nome_arquivo)
-{
-	int tamanho=0;
-	FILE *arquivo;
-	
-	arquivo = fopen(nome_arquivo, "r");
-	fseek(arquivo, 0, SEEK_END);
-	tamanho = ftell(arquivo);
-	fclose(arquivo);
-	return tamanho;
-}
-
 char* le_arq_texto(char *nome_arquivo)
 {
-	FILE *arquivo;
-	char string[200];
-	arquivo = fopen(nome_arquivo, "r");
-	fseek(arquivo, 0, SEEK_SET);
-	int i;
-	
-	while((string = gets(arquivo) ) != EOF) 
-	 printf("%s", string); /* imprime o caracter lido */
- 	fclose(arquivo); 
+  FILE *arq;
+  char Linha[100], texto[400];
+  char *result;
 
+  
+  arq = fopen(nome_arquivo, "rt");
+  if (arq == NULL)  
+  {
+     printf("Problemas na abertura do arquivo\n");
+     return"";
+  }
+  while (!feof(arq))
+  {
+      result = fgets(Linha, 100, arq);  
+      if (result)
+	  strcat(texto, Linha);
+  }
+  fclose(arq);
+  return texto;
 }
 ```
 
@@ -195,27 +192,31 @@ $ Ola mundo cruel! Ola universo ingrato!
 #include <stdlib.h>
 ----------------------------- Não terminado -------------------------
 ```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 int main(int argc, const char * argv[])
 {
-	FILE *fp;
-	char arq[200];
+  FILE *arq;
+  char Linha[100];
+  char *result;
 
 
-	fp = fopen(argv[1], "r");
-
-        if (!fp)
-        printf ("Erro na abertura do arquivo.");
-	else{
-	fseek(arquivo, 0, SEEK_SET);
-	while((string = gets(arquivo) ) != EOF) 
-	 printf("%s", string); /* imprime o caracter lido */
- 	fclose(arquivo); 	
-}
-
-	
-
-
-return 0
+  arq = fopen(argv[1], "rt");
+  if (arq == NULL)  
+  {
+     printf("Problemas na abertura do arquivo\n");
+     return 0;
+  }
+  while (!feof(arq))
+  {
+      result = fgets(Linha, 100, arq);  
+      if (result)
+	  printf("%s", Linha);
+  }
+  fclose(arq);
+  return 0;
 }
 ```
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
@@ -224,4 +225,50 @@ return 0
 $ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
 $ ./busca_e_conta Ola ola.txt
 $ 'Ola' ocorre 2 vezes no arquivo 'ola.txt'.
+```
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(int argc, const char * argv[])
+{
+	  FILE *arq;
+	  char word[20];
+	  int i=0, found=0, l=0;
+
+
+	  arq = fopen(argv[2], "rt");
+	  if (arq == NULL)  
+	  {
+	     printf("Problemas na abertura do arquivo\n");
+	     return 0;
+	  }
+	  fseek(arq, 0, SEEK_SET);
+	strcpy(word, "");
+	while(!feof(arq))
+	{
+		  if(fgetc(arq)!=32 && (!feof(arq)))
+		  {	
+			fseek(arq, i, SEEK_SET);
+			while(fgetc(arq) != ' ' && (!feof(arq)))
+			{
+				word[l]=fgetc(arq);
+				l++;
+			}
+			i+= l;
+			l=0;
+			if(word==argv[1])
+			{
+				found++;
+			}		
+			strcpy(word, "");	
+			
+		  }
+ 	}
+	  fclose(arq);
+	  printf("Número de ocorrências da palavra '%s': %d\n", argv[1], found);
+	  return 0;
+}
 ```
