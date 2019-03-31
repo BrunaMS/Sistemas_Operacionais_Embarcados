@@ -39,15 +39,30 @@ void rewind ( FILE * stream );
 stdio.h, string.h e stdlib.h
 
 **2. O que é a norma POSIX?**
+Portable Operating System Interface
+
+
 
 **3. Considerando a norma POSIX, responda:**
 
 **(a) Quais são as funções (e seus protótipos) para abrir e fechar arquivos?**
 
+int open(const char* path, int oflag, ...);
+
+int close(const char* path);
+
 **(b) Quais são as funções (e seus protótipos) para escrever em arquivos?**
+
+ssize_t write(int fildes, const void *buf, size_t nbyte);
 
 **(c) Quais são as funções (e seus protótipos) para ler arquivos?**
 
+ssize_t read(int fildes, void *buf, size_t nbyte);
+
 **(d) Quais são as funções (e seus protótipos) para reposicionar um ponteiro para arquivo?**
 
+off_t lseek(int fd, off_t offset, int whence);
+
 **(e) Quais bibliotecas devem ser incluídas no código para poder utilizar as funções acima?**
+ 
+fcntl.h e unistd.h
