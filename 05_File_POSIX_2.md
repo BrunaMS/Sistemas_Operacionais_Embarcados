@@ -7,6 +7,7 @@ Para todas as questões, utilize as funções da norma POSIX (`open()`, `close()
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(){
 
@@ -19,9 +20,9 @@ if(fp==-1)
 	printf ("Erro na abertura do arquivo.\n");
 	exit (1);
 }
-
+strcpy(string,"Olá mundo!\n");
 lseek(fp, 0, SEEK_SET); 
-write(fp, "Olá mundo!\n", (15*sizeof(char)));
+write(fp, string, (sizeof(string)));
 close(fp);
 }
 ```
@@ -35,6 +36,10 @@ $ Digite a sua idade: 30
 $ cat Eu.txt
 $ Nome: Eu
 $ Idade: 30 anos
+```
+
+```C
+
 ```
 
 3. Crie um código em C que recebe o nome do usuário e e sua idade como argumentos de entrada (usando as variáveis `argc` e `*argv[]`), e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_2':
