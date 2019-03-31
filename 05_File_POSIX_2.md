@@ -39,7 +39,38 @@ $ Idade: 30 anos
 ```
 
 ```C
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
+int main()
+{
+
+	int fp;
+	char nome[50]="", idade[20]="", arq[50] = "";
+
+	printf("Digite seu nome:\n");
+	scanf("%s",nome);
+	printf("Digite sua idade:\n");
+	scanf("%s", idade);
+	strcpy(arq, nome);
+	strcat(arq, ".txt");
+	fp = open(arq,O_RDWR | O_CREAT);
+	if(fp==-1)
+	{
+		printf ("Erro na abertura do arquivo.\n");
+		exit (1);
+	}
+	lseek(fp, 0, SEEK_SET); 
+	write(fp, "Nome: ", (sizeof("Nome: ")));
+	write(fp, nome, (sizeof(nome)));
+	write(fp, "\nIdade: ", (sizeof("Idade: ")));
+	write(fp, idade, (sizeof(idade)));
+	write(fp, " anos\n", (sizeof("anos")));
+	close(fp);
+}
 ```
 
 3. Crie um código em C que recebe o nome do usuário e e sua idade como argumentos de entrada (usando as variáveis `argc` e `*argv[]`), e escreve este conteúdo em um arquivo com o seu nome e extensão '.txt'. Por exemplo, considerando que o código criado recebeu o nome de 'ola_usuario_2':
@@ -49,6 +80,52 @@ $ ./ola_usuario_2 Eu 30
 $ cat Eu.txt
 $ Nome: Eu
 $ Idade: 30 anos
+```
+
+```C
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, const char * argv[])
+{
+
+	int fp, i=0;
+	char nome[50]="";
+	char idade[20]="";
+	char file[55]="";
+
+
+	for(i=1; i<=(argc-2); i++)
+	{
+		if(i==1)
+			strcpy(nome, argv[i]);
+		else
+		{	
+			strcat(nome, " ");
+			strcat(nome, argv[i]);
+		}
+	}
+	strcpy(file, nome);
+	strcpy(idade, argv[argc-1]);
+	strcat(file, ".txt");
+	fp = open(file, O_RDWR | O_CREAT);
+	if(fp==-1)
+	{
+		printf ("Erro na abertura do arquivo.\n");
+		printf("file: %s\nnome: %s\n", file, nome);
+		exit (-1);
+	}
+	lseek(fp, 0, SEEK_SET); 
+	write(fp, "Nome: ", (sizeof("Nome: ")));
+	write(fp, nome, (sizeof(nome)));
+	write(fp, "\nIdade: ", (sizeof("Idade: ")));
+	write(fp, idade, (sizeof(idade)));
+	write(fp, " anos", (sizeof("anos")));
+	close(fp);
+}
 ```
 
 4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado 'bib_arqs.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.
