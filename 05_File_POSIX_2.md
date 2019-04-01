@@ -130,7 +130,131 @@ int main(int argc, const char * argv[])
 
 4. Crie uma função que retorna o tamanho de um arquivo, usando o seguinte protótipo: `int tam_arq_texto(char *nome_arquivo);` Salve esta função em um arquivo separado chamado 'bib_arqs.c'. Salve o protótipo em um arquivo chamado 'bib_arqs.h'. Compile 'bib_arqs.c' para gerar o objeto 'bib_arqs.o'.
 
-5. Crie uma função que lê o conteúdo de um arquivo-texto e o guarda em uma string, usando o seguinte protótipo: `char* le_arq_texto(char *nome_arquivo);` Repare que o conteúdo do arquivo é armazenado em um vetor interno à função, e o endereço do vetor é retornado ao final. (Se você alocar este vetor dinamicamente, lembre-se de liberar a memória dele quando acabar o seu uso.) Salve esta função no mesmo arquivo da questão 4, chamado 'bib_arqs.c'. Salve o protótipo no arquivo 'bib_arqs.h'. Compile 'bib_arqs.c' novamente para gerar o objeto 'bib_arqs.o'.
+
+**Main.c:**
+
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include "bib_arqs.h"
+
+int main()
+{
+	int tamanho=0;
+	char arquivo[50];
+	printf("Digite o nome do arquivo que você deseja saber o tamanho (em Bytes):");
+	scanf("%s", arquivo);
+	tamanho = tam_arq_texto(arquivo);
+	printf("O arquivo %s contém %d Bytes\n", arquivo, tamanho);
+return 0;
+}
+```
+**bib_arqs.c:**
+
+```C
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+
+int tam_arq_texto(char *nome_arquivo)
+{
+	int tamanho=0;
+	int arquivo;
+	
+	arquivo = open(nome_arquivo,O_RDONLY);
+	if(arquivo==-1)
+	{
+		printf ("Erro na abertura do arquivo.\n");
+		exit (-1);
+	}
+	tamanho = lseek(arquivo, 0, SEEK_END);
+	close(arquivo);
+	return tamanho;
+}
+```
+**Makefile:**
+```C
+bib_arqs:  main.o bib_arqs.o
+	gcc $(CFLAGS) -o bib_arqs main.o bib_arqs.o
+main.o: bib_arqs.c bib_arqs.h
+	gcc $(CFLAGS) -c main.c
+reciprocal.o: bib_arqs.c bib_arqs.h
+	gcc $(CFLAGS) -c bib_arqs.c
+clean:
+	rm -f *.o bib_arqs
+```
+
+**bib_arqs.h:**
+```C
+int tam_arq_texto(char *nome_arquivo);
+```
+
+
+5. Crie uma função que lê o conteúdo de um arquivo-texto e o guarda em uma string, usando o seguinte protótipo: `char* le_arq_texto(char *nome_arquivo);` Repare que o conteúdo do arquivo é armazenado em um vetor interno à função, e o endereço do vetor é retornado ao final. (Se você alocar este vetor dinamicamente, lembre-se de liberar a memória dele quando acabar o seu uso). Salve esta função no mesmo arquivo da questão 4, chamado 'bib_arqs.c'. Salve o protótipo no arquivo 'bib_arqs.h'. Compile 'bib_arqs.c' novamente para gerar o objeto 'bib_arqs.o'.
+
+**Main.c:**
+
+```C
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include "bib_arqs.h"
+
+int main()
+{
+	char arquivo[20];
+	char texto[400];
+	int arq;
+
+
+
+	
+	printf("Digite o nome do arquivo de texto que você deseja salvar na string:");
+	scanf("%s", arquivo);
+	arq = open(arquivo, O_RDONLY);
+	  if (arq == -1)  
+	  {
+		printf("Problemas na abertura do arquivo\n");
+	        return 0;
+	  }
+	lseek(arq, 0, SEEK_SET);
+	printf("\n %s", le_arq_texto(arquivo));
+	printf("\nFim do arquivo.");
+	close(arq);
+	return 0;
+}
+```
+**bib_arqs.c:**
+
+```C
+char* le_arq_texto(char *nome_arquivo)
+{
+  int arq, i=0;
+  char Linha[100], texto[400];
+  char *result;
+
+  printf("Teste");
+  arq = open(nome_arquivo, O_RDONLY);
+  if (arq == -1)  
+  {
+     printf("Problemas na abertura do arquivo\n");
+     return"";
+  }
+  lseek(arq, 0, SEEK_SET);
+  while (arq!=0)
+  {
+      read(arq, Linha, lseek(arq, i, SEEK_SET));  
+      strcat(texto, Linha);
+	i++;
+  }
+  close(arq);
+  return texto;
+}
+```
 
 6. Crie um código em C que copia a funcionalidade básica do comando `cat`: escrever o conteúdo de um arquivo-texto no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'cat_falsificado':
 
