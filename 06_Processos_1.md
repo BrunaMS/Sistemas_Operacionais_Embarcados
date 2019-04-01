@@ -2,7 +2,11 @@
 
 (a) Mostrar todos os processos rodando na máquina?
 
+`ps -aux`
+
 (b) Mostrar os processos de um usuário?
+
+` ps -af`
 
 (c) Ordenar todos os processos de acordo com o uso da CPU?
 
