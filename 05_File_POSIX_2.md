@@ -264,6 +264,33 @@ $ ./cat_falsificado ola.txt
 $ Ola mundo cruel! Ola universo ingrato!
 ```
 
+```C
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main(int argc, const char * argv[])
+{
+	int fp;
+	char c;
+
+	fp = open (argv[1], O_RDONLY);
+	if(fp==-1)
+	{
+		printf ("Erro na abertura do arquivo.\n");
+		exit (1);
+	}
+	while(read(fp, &c, 1) != 0)
+		printf("%c", c);
+	close(fp);
+	
+	return 0;
+}
+```
+
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
 
 ```bash
