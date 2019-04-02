@@ -48,6 +48,24 @@ $ 19 20 21 22 23 24 25
 $ 26 27 28 29 30 31
 ```
 
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int main (int argc, const char *argv[])
+{
+	int i=1;
+	while(i<argc)
+	{
+		system(argv[i]);
+		i++;
+	}
+	return 0;
+}
+```
+
 3. Crie um código em C que recebe o nome de diversos comandos pelos argumentos de entrada (`argc` e `*argv[]`), e executa cada um usando `fork()` e `exec()`.
 
 4. Crie um código em C que gera três processos-filho usando o `fork()`, e que cada processo-filho chama a seguinte função uma vez:
