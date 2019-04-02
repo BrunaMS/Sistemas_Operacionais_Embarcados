@@ -6,13 +6,19 @@
 
 (b) Mostrar os processos de um usuário?
 
-` ps -af`
+` ps -u usuário`
 
 (c) Ordenar todos os processos de acordo com o uso da CPU?
 
+ `ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head`
+
 (d) Mostrar a quanto tempo cada processo está rodando?
 
+`ps -eo pid,ppid,cmd,%mem,%cpu,time --sort=-time | head`
+
 2. De onde vem o nome `fork()`?
+
+`De "bifurcação" em inglês, o que indica algo que divide o código em dois caminhos diferentes`
 
 3. Quais são as vantagens e desvantagens em utilizar:
 
