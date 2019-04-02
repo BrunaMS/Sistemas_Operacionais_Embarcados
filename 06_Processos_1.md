@@ -40,18 +40,18 @@
 
 `- O processo cessa imediatamente a execução do programa corrente e passa a executar um novo programa do início.`
 
-4. É possível utilizar o `exec()` sem executar o `fork()` antes?
+4. É possível utilizar o `exec()` sem executar o `fork()` antes? `Não.`
 
 5. Quais são as características básicas das seguintes funções:
 
-(a) `execp()`?
+(a) `execp()`? `Aceita que o nome ou procura do programa esteja no current path`
 
-(b) `execv()`?
+(b) `execv()`? `Aceita que a lista de argumentos do novo programa seja nula.`
 
-(c) `exece()`?
+(c) `exece()`? `Aceita um argumento adicional.`
 
-(d) `execvp()`?
+(d) `execvp()`? `Fornece uma lista de ponteiros para strings terminadas com caracteres nulos que representam a lista de argumentos disponível para o novo programa.`
 
-(e) `execve()`?
+(e) `execve()`? `Executa o programa apontado por meio do nome do arquivo`
 
-(f) `execle()`?
+(f) `execle()`? `Permite especificar o ambiente do programa executado por meio do argumento envp.`
