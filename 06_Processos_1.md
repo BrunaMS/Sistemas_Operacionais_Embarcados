@@ -24,9 +24,21 @@
 
 (a) `system()`? 
 
-`Permite executar um comando dentro de um programa, criando um sub-processo (processo filho).`
+`- Permite executar um comando dentro de um programa, criando um sub-processo (processo filho);`
+
+`- Retorna em sua saída o status do comando no shell;`
+
+`- Depende muito do sistema.`
 
 (b) `fork()` e `exec()`?
+
+`- A função fork() cria uma cópia do processo atual e em seguida a função exec() substitui o conteúdo do novo processo por um novo programa;`
+
+`- Tanto o processo pai quanto o filho continuam a executar normalmente.`
+
+`- A função exec() substitui o programa em execução de um processo por outro programa;`
+
+`- O processo cessa imediatamente a execução do programa corrente e passa a executar um novo programa do início.`
 
 4. É possível utilizar o `exec()` sem executar o `fork()` antes?
 
