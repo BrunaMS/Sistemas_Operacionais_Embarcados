@@ -22,7 +22,9 @@
 
 3. Quais são as vantagens e desvantagens em utilizar:
 
-(a) `system()`?
+(a) `system()`? 
+
+`Permite executar um comando dentro de um programa, criando um sub-processo (processo filho).`
 
 (b) `fork()` e `exec()`?
 
