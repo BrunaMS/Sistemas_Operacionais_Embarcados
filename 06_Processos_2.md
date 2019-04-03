@@ -89,7 +89,33 @@ int main (int argc, const char *argv[])
 ```
 
 3. Crie um código em C que recebe o nome de diversos comandos pelos argumentos de entrada (`argc` e `*argv[]`), e executa cada um usando `fork()` e `exec()`.
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
 
+int main(int argc, char *argv[])
+{
+	int i=0;
+	char* lista_de_argumentos[argc-1];
+	pid_t child_pid = fork();
+
+	
+		if (child_pid == 0)
+		{
+			printf("if");
+			execvp(argv[0], argv);
+			printf("Erro de execução no comando exec.\n");     
+			printf("\n");
+		}
+
+
+	return 0;
+}
+
+```
 4. Crie um código em C que gera três processos-filho usando o `fork()`, e que cada processo-filho chama a seguinte função uma vez:
 
 ```C
