@@ -1,5 +1,44 @@
 1. Crie um programa em C que cria um processo-filho e um pipe de comunicação. Faça com que o processo-pai envie os valores 1, 2, 3, 4, 5, 6, 7, 8, 9 e 10 para o processo-filho, com intervalos de 1 segundo entre cada envio. Depois de o processo-pai enviar o número 10, ele aguarda 1 segundo e termina a execução. O processo-filho escreve na tela cada valor recebido, e quando ele receber o valor 10, ele termina a execução.
+```C
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <string.h>
+
+int main()
+{
+	int i=1, nro;
+	int pid;	
+	int fd[2];	
+	
+	pipe(fd);
+	pid = fork();
+
+	if(pid == 0)
+	{	
+		for(i=1;i<=10;i++)
+		{
+			if(read(fd[0], &nro, sizeof(int)) < 0)
+				printf("Erro na leitura do pipe\n");
+			else	
+				printf("%d\n", nro);
+		}	
+	}
+
+	else
+	{
+		for(i=1;i<=10;i++)
+		{
+			if (write(fd[1], &i, sizeof(int)) < 0)
+				printf("Erro na escrita do pipe\n");
+			sleep(1);
+		}
+	}
+	return 0;
+}
+```
 2. Crie um programa em C que cria um processo-filho e um pipe de comunicação. Utilize o pipe para executar a seguinte conversa entre processos:
 
 ```
