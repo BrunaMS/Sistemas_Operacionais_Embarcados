@@ -54,3 +54,6 @@ int main()
 ```
 
 Sabendo que a função `alarm()` tem como entrada a quantidade de segundos para terminar a contagem, quão precisos são os alarmes criados neste código? De onde vem a imprecisão? Este é um método confiável para desenvolver aplicações em tempo real?
+`A imprecisão desse código vem,principalmente, do fato de que, ainda que o chamamento e execução do alarme estejam dentro do esperado, o programa e a lógica em si já tomarão um tempo, ainda que pouco, para si, gerando um intervalo um pouco maior do que o esperado.
+
+A confiabilidade desse sistema dependeria da necessidade de precisão do serviço que ele prestará.`
