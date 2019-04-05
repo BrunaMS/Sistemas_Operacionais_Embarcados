@@ -47,6 +47,8 @@ PAI: Não façais nada violento, praticai somente aquilo que é justo e equilibr
 FILHO: Mas até uma criança de três anos sabe disso!
 PAI: Sim, mas é uma coisa difícil de ser praticada até mesmo por um velho como eu...
 ```
+Neste exercício, quem recebe a mensagem via pipe é quem as escreve no terminal.
+
 ```C
 
 
@@ -125,7 +127,7 @@ int main()
 	return 0;
 }
 ```
-Neste exercício, quem recebe a mensagem via pipe é quem as escreve no terminal.
+
 
 3. Crie um programa em C que cria dois processos-filhos e um pipe de comunicação. Utilize o pipe para executar a seguinte conversa entre processos:
 
@@ -136,7 +138,146 @@ PAI: Os dois se enganam. É a mente dos senhores que se move.
 ```
 
 Neste exercício, quem recebe a mensagem via pipe é quem as escreve no terminal.
+```C
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <string.h>
+
+int main()
+{
+	int pid, pid_1;	
+	int fd[2];	
+	char msg[100], rcv[100];
+	pipe(fd);
+	pid = fork();
+
+	if(pid == 0)
+	{
+		strcpy(msg,"FILHO1: Quando o vento passa, é a bandeira que se move.");
+		pid_1 = getpid();
+		
+		if (write(fd[1], msg, sizeof(msg)) < 0)
+			printf("Erro na escrita do pipe\n");
+		else
+		{
+			sleep(2);
+			if (read(fd[0], rcv, sizeof(msg)) < 0)
+				printf("Erro na leitura do pipe\n");
+			else
+			{
+				printf("%s\n", rcv);
+				pid = fork();
+
+				if(getpid() != pid_1)
+				{
+					strcpy(msg,"FILHO2: Não, é o vento que se move.");
+					if (write(fd[1], msg, sizeof(msg)) < 0)
+						printf("Erro na escrita do pipe\n");
+					else
+					{
+						sleep(2);
+						if (read(fd[0], rcv, sizeof(msg)) < 0)
+							printf("Erro na leitura do pipe\n");
+						else
+							printf("%s\n", rcv);
+					}
+				}
+			}
+		}
+
+	}
+
+	else
+	{
+		sleep(5);
+		strcpy(msg,"PAI: Os dois se enganam. É a mente dos senhores que se move.");
+		if (write(fd[1], msg, sizeof(msg)) < 0)
+			printf("Erro na escrita do pipe\n");
+		else
+		{
+			if (read(fd[0], rcv, sizeof(msg)) < 0)
+				printf("Erro na leitura do pipe\n");
+			else
+				printf("%s\n", rcv);
+
+		}
+	}
+	return 0;
+}
+```
 4. Crie um programa em C que cria um processo-filho e um pipe de comunicação. O processo-filho deverá pedir o nome do usuário, envia-lo para o pai via pipe, e o pai deverá escrever o nome do usuário no terminal.
+```C
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <string.h>
+
+int main()
+{
+	int i=1, nro;
+	int pid;	
+	int fd[2];
+	char name[20];	
+	
+	pipe(fd);
+	pid = fork();
+
+	if(pid == 0)
+	{	
+
+		printf("Digite seu nome:");
+		scanf("%s", name);
+		if(write(fd[1], name, 20) < 0)
+			printf("Erro na leitura do pipe\n");
+	}
+
+	else
+	{
+		sleep(2);
+		if (read(fd[0], name, 20) < 0)
+			printf("Erro na escrita do pipe\n");
+		else
+		{
+			printf("O pai diz que seu nome é...:\né...\né...\né...\né...\né...\né...\né...\né...\né...\né...\né...\né...\né...\n:(tãdãdãdããããããããã\nãããããããããããããããããããããããããã\nããããããããããããããããããã\nãããããããããããããããããããã\nãããããããããããããããããããããã\nãããããããããããããããããããããã\nãããããããããããããããããããã\nãããããããããããããããããããã\nãããããããããããããããããããããã...\n(barulhos aleatórios))\n %s!!!!!!!!!!!!\nIsso que é mágica de verdade!\n", name);
+		}		
+	}
+	return 0;
+}
+```
 5. Utilize o sinal de alarme para chamar a cada segundo o comando `ps` ordenando todos os processos de acordo com o uso da CPU. Ou seja, seu código atualizará a lista de processos a cada segundo. Além disso, o código deverá tratar o sinal do CTRL-C, escrevendo "Processo terminado!" na tela antes de terminar a execução do processo.
+
+```C
+#include <signal.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void tratamento_alarme(int sig)
+{
+	alarm(1);
+	system("clear");
+	system("ps -eo pid,cmd,%mem,%cpu --sort=-%cpu | head");
+	//system("date +%s%3N");
+}
+
+void funcao_para_control_c()
+{
+	printf("\nProcesso Finalizado!\n");
+	exit(1);
+}
+
+int main()
+{
+	signal(SIGALRM, tratamento_alarme);
+	signal(SIGINT, funcao_para_control_c);
+	alarm(1);
+	printf("Aperte CTRL+C para acabar:\n");
+	while(1);
+	return 0;
+}
+```
