@@ -31,6 +31,10 @@ int main (int argc, char** argv)
 }
 ```
 
+
+`3 Threads, com as duas threads criadas funcionando paralelamente. Essa característica é definida`
+
+
 (b)
 ```C
 void* funcao_thread_1(void *arg);
@@ -47,10 +51,16 @@ int main (int argc, char** argv)
 }
 ```
 
+`3 Threads, com apenas duas coexistindo (a função principal e outra paralela), devido à existência do comando pthread_join, que faz com que a 2ª thread só seja executada após o término da primeira.`
+
 3. Apresente as características e utilidades das seguintes funções:
 
 (a) `pthread_setcancelstate()`
+    
+       `Define, através do valor colocado no argumento "state", o estado de cancelamento da thread chamada.`
 
 (b) `pthread_setcanceltype()`
+	`Define, através do valor colocado no argumento "type", um tipo para o cancelamento da thread chamada.`
+
 
 (DICA: elas são relacionadas à função pthread_cancel().)
