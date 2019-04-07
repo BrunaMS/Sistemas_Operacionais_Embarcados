@@ -1,8 +1,14 @@
 1. Quais são as vantagens e desvantagens em utilizar:
 
 (a) fork?
+	- Cada filho executa sua própria tarefa;
+	- Cada filho tem seu espaço de memória protegido;
+	- Comunicação feita por mecanismos (ICP);
 
 (b) threads?
+	- Uma só aplicação pode rodar várias threads;
+	- Todas as threads compartilham o mesmo espaço de memória;
+	- A comunicação é mais simples;
 
 2. Quantas threads serão criadas após as linhas de código a seguir? Quantas coexistirão? Por quê?
 
