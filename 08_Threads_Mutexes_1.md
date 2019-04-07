@@ -57,10 +57,11 @@ int main (int argc, char** argv)
 
 (a) `pthread_setcancelstate()`
     
-       `Define, através do valor colocado no argumento "state", o estado de cancelamento da thread chamada.`
+       Define, através do valor colocado no argumento "state", o estado de cancelamento da thread chamada.
 
 (b) `pthread_setcanceltype()`
-	`Define, através do valor colocado no argumento "type", um tipo para o cancelamento da thread chamada.`
+
+	Define, através do valor colocado no argumento "type", um tipo para o cancelamento da thread chamada.
 
 
 (DICA: elas são relacionadas à função pthread_cancel().)
