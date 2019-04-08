@@ -262,9 +262,9 @@ int main ()
 
 	for (i = 0; i < 4; i++)
 	{
-		if(thread5_args.avg[i]>thread5_args.ultimate_avg)
-			thread5_args.ultimate_avg = thread5_args.ultimate_avg + thread5_args.avg[i];
+		thread5_args.ultimate_avg = thread5_args.ultimate_avg + thread5_args.avg[i];
 	}
+	thread5_args.ultimate_avg = thread5_args.ultimate_avg/4;
 	printf("\n\n\n-------------------------- Valor médio final: %ld--------------------------", thread5_args.ultimate_avg);
 	
 	
@@ -274,7 +274,6 @@ int main ()
 ```
 4. Repita o exercício anterior, mas calcule a variância do vetor ao invés da média.
 
-# Questões extra somente para estudo
 ```C
 #include <pthread.h>
 #include <stdio.h>
@@ -373,6 +372,7 @@ int main ()
 }
 ```
 
+# Questões extra somente para estudo
 
 5. Crie um programa em C que preenche matrizes `long int A[60][60]` e `long int B[60][60]` completamente com valores aleatórios (use a função `random()`), e que calcula a soma das duas matrizes por dois métodos:
 
