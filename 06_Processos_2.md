@@ -99,19 +99,24 @@ int main (int argc, const char *argv[])
 int main(int argc, char *argv[])
 {
 	int i=0;
-	char* lista_de_argumentos[argc-1];
-	pid_t child_pid = fork();
-
+	char* lista_de_args[] = {NULL, NULL};
 	
+
+	for(i=1;i<argc;i++)	
+	{
+		pid_t child_pid = fork();
 		if (child_pid == 0)
 		{
-			printf("if");
-			execvp(argv[0], argv);
-			printf("Erro de execução no comando exec.\n");     
-			printf("\n");
+			lista_de_args[0] = argv[i];
+			execvp(lista_de_args[0], lista_de_args);
+			fprintf(stderr, "Erro em %s\n", argv[i]);
+			return -1;
+
 		}
+		else
+			wait(NULL);
 
-
+	}
 	return 0;
 }
 
@@ -147,6 +152,8 @@ int main()
 		child_pid = fork();
 		if(child_pid == 0 && v_global== 0)
 			Incrementa_Variavel_Global(child_pid);
+		else
+			wait(NULL);
 	}
 	return 0;
 }
