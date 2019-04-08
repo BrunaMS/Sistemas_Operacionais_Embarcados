@@ -377,7 +377,77 @@ int main ()
 5. Crie um programa em C que preenche matrizes `long int A[60][60]` e `long int B[60][60]` completamente com valores aleatórios (use a função `random()`), e que calcula a soma das duas matrizes por dois métodos:
 
 (a) De forma sequencial;
+```C
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
+#define MAX 60
+
+struct char_print_parms
+	{
+	long int A[MAX][MAX];
+	long int B[MAX][MAX];  
+	long int sum[MAX][MAX];
+	};
+
+struct var_sum
+	{	
+	long int sum[4];
+	long int ultimate_sum;
+	};
+
+void* char_print (void* parameters) {
+	struct char_print_parms* p = (struct char_print_parms*) parameters;
+	int i, j;
+
+	printf("\n\n\n\n--------------------------Vetor V --------------------------\n\n\n\n");
+
+	for (j = 0; j <= (MAX-1); j++)
+	{
+		for (i = 0; i <= (MAX-1); i++)
+		{
+			p->A[i][j] = random();
+			p->B[i][j] = random();
+			p->sum[i][j] = p->A[i][j] + p->B[i][j];
+		}
+	}
+	printf("Soma de matrizes (A + B):\n");
+	for (i = 0; i <= (MAX-1); i++)
+	{
+		for (j = 0; j <= (MAX-1); j++)
+		{
+			if(j==0)
+			{
+				printf("\n");
+				printf("| ");
+			}
+
+			printf(" %ld ", p->sum[i][j]);
+			if(j==(MAX-1))
+				printf(" |");
+		}
+	}
+	printf("\nPrimeiro termo de A:    		%ld          +\nPrimeiro termo de B:    		%ld\n		            _________________________________ \nPrimeiro termo de X(A+B):               %ld\n", p->A[1][1], p->B[1][1], p->sum[1][1]);
+	return NULL;
+}
+
+int main ()
+{
+	int i=0;
+	pthread_t thread_id;
+
+	struct char_print_parms thread_args;
+
+
+	pthread_create (&thread_id, NULL, &char_print, &thread_args);
+	pthread_join (thread_id, NULL);
+
+	return 0;
+
+}
+```
 (b) De forma paralela.
 
 Ao final do programa principal, compare os resultados obtidos pelos dois métodos.
