@@ -151,7 +151,7 @@ int main()
 	{
 		child_pid = fork();
 		if(child_pid == 0 && v_global== 0)
-			Incrementa_Variavel_Global(child_pid);
+			Incrementa_Variavel_Global((int)getpid());
 		else
 			wait(NULL);
 	}
