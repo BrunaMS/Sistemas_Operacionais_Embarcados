@@ -6,7 +6,32 @@ $    Ano Novo: segunda-feira
 $    Dia do Trabalhador: terca-feira
 $    Natal: terca-feira
 ```
+```C
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
+int main(int argc, const char* argv[])
+{
+	char chamada[50];
+	
+	fprintf(stderr, "\nAno Novo: ");
+	sprintf(chamada, "date -d 01/01/%s +\"%%A\"", argv[1]);
+	system(chamada);
+	fprintf(stderr, "\nDia do trabalhador: ");
+	sprintf(chamada, "date -d 05/01/%s +\"%%A\"", argv[1]);
+	system(chamada);
+	fprintf(stderr, "\nNatal: ");
+	sprintf(chamada, "date -d 12/25/%s +\"%%A\"", argv[1]);
+	system(chamada);
+
+return 1;
+}
+```
 2. Crie uma função em C que paralelize o cálculo da média de um vetor excluindo o valor máximo do vetor, usando 4 threads. Use o seguinte protótipo:
 
 ```C
@@ -20,6 +45,90 @@ int a[] = {1,2,3,501,4,5};
 ```
 
 a média sem o máximo é igual a `(1+2+3+4+5)/5 = 3`. Já a média é igual a `(1+2+3+501+4+5)/6 = 86`.
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+
+int a[] = {1,2,3,501,4,5}, N = 6; 
+double sum = 0, max, real_avrg=0, min_avrg;
+
+
+
+void* max_value(void* dummy_ptr)
+{
+	int count=0;
+	max = a[0];
+	for(count=0;count<=(N-1);count++)
+	{
+		if(a[count] >= max)
+			max = a[count];		
+	}		
+	return NULL;
+}
+
+void* sum_value(void* dummy_ptr)
+{
+	int count=0;
+
+	for(count=0;count<=(N-1);count++)
+	{
+		sum = sum + (a[count]);		
+	}		
+	return NULL;
+}
+
+void* calc_real_avrg(void* dummy_ptr)
+{
+	real_avrg = sum/N;
+	printf("real_avrg(função): %lf\n", real_avrg);
+	return NULL;
+}
+
+void* calc_min_avrg(void* dummy_ptr)
+{
+	min_avrg = (sum - max)/(N-1);
+	printf("min_avrg(função): %lf\n", min_avrg);
+	return NULL;
+}
+
+
+
+double media_sem_maximo_paralelo()
+{
+	pthread_t thread1_id, thread2_id, thread3_id, thread4_id;
+	
+	pthread_create (&thread1_id, NULL, &max_value, NULL);
+	pthread_create (&thread2_id, NULL, &sum_value, NULL);
+	pthread_join(thread2_id, NULL);
+	pthread_create (&thread3_id, NULL, &calc_real_avrg, NULL);
+	pthread_join(thread1_id, NULL);
+	pthread_create (&thread4_id, NULL, &calc_min_avrg, NULL);
+	pthread_join(thread3_id, NULL);
+	pthread_join(thread4_id, NULL);	
+	return min_avrg;
+}
+
+
+int main(int argc, const char* argv[])
+{
+
+	double media, media_min;
+
+	media_min = media_sem_maximo_paralelo(a, N);
+	printf("Pela main, média sem máximo = %lf\n", media_min);
+
+return 1;
+}
+```
+
+
 
 3. Considerando o código abaixo, responda:
 
