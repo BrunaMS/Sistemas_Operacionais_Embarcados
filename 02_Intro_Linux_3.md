@@ -17,6 +17,27 @@ Não limite o script a 3 meses. Ele deve funcionar para vários casos, como por 
 ```bash
 ./cals.sh 1 2020
 ./cals.sh 1 2019 2 2020 3 2021 1 2010
+
+```bash
+#!/bin/bash
+ 
+echo "Numero de argumentos: $#"
+ 
+count=0
+n=0
+for ARG in $*; do
+	count=`expr $count + 1`
+	if [ $n -eq 0 ]; then
+		mes=$(($ARG)) 
+		n=1
+	elif [ $n -eq 1 ]; then	
+		ano=$(($ARG)) 
+		n=0
+		cal $mes $ano
+	fi
+done
+```
+
 ```
 Utilizando a lógica do script anterior, descubra em que dia da semana caiu o seu aniversário nos últimos dez anos.
 ```bash
