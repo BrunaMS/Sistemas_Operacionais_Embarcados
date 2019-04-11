@@ -17,7 +17,7 @@ Não limite o script a 3 meses. Ele deve funcionar para vários casos, como por 
 ```bash
 ./cals.sh 1 2020
 ./cals.sh 1 2019 2 2020 3 2021 1 2010
-
+```
 ```bash
 #!/bin/bash
  
@@ -38,21 +38,21 @@ for ARG in $*; do
 done
 ```
 
-```
 Utilizando a lógica do script anterior, descubra em que dia da semana caiu o seu aniversário nos últimos dez anos.
+
 ```bash
-$n=0
-$args=""
-$for i in $@
-$do
-$  if[$n -eq 0]; then
-$    args = $i  
-$    n = 1 
-$  elif [$n -eq 1]; then
-$    cal $args $i
-$    n=0
-$  fi
-$done
+#!/bin/bash
+ 
+echo "Numero de argumentos: $#"
+ 
+count=0
+n=0
+echo "Data: 19 de Junho"
+for ano in {2009..2019} 
+do
+	echo "Ano: $ano" 
+	date -d 06/19/$ano +%A
+done
 ```
 
 ### 3. Crie um arquivo sites.txt com o seguinte conteúdo:
