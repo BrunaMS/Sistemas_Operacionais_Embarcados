@@ -165,12 +165,16 @@ int main()
 ```
 
 (a) Quantos processos-filho são criados ao total? Justifique sua resposta.
+`3 processos-filho, porque o while gera um loop infinito dentro da condição pid==0, ou seja, todos os processos filhos, assim que criados, ficam presos no loop, enquanto o processo pai continua o loop for.`
 
 (b) Quantos pipes são criados ao total, considerando todos os processos? Justifique sua resposta.
-
+`3, um em cada loop for.
+`
 (c) Quantos pipes cada processo-filho compartilha com o processo-pai? Justifique sua resposta.
+`A cada loop FOR é criado um novo pipe, ou seja, o 1º compartilha 1, o 2º compartilha 2 e o 3º compartilha 3 pipes diferentes.`
 
 (d) Quantos processos enxergarão o sinal `SIGINT`? Justifique sua resposta.
+`Apenas o pai, ou seja, 1. Isso devido ao fato de o sinal estar antes da criação do fork.`
 
 4. Considerando o código abaixo, responda:
 
@@ -215,8 +219,17 @@ int main()
 
 (a) Quais são os papéis dos processos pai e filho neste código?
 
+`O pai gera um valor aleatório para cur_val enquanto a variável request == 'V'. O filho verifica se em algum momento a variável cur_val se tornou zero. Caso sim, request recebe 'F', que será enviado para o pai e finalizará a execução do programa.`
+
+`Juntos, verificam a ocorrência de zero em uma variável recebendo valores aleatórios e finalizam quando o encontram.`
+
 (b) Neste código, os processos pai e filho estão seguindo o modelo cliente-servidor? Justifique sua resposta.
+`Sim. A comunicação entre os processos e o fato de o processo-filho aguardar uma resposta específica do processo-pai para realizar uma determinada ação gera esse tipo de modelo.`
+
 
 (c) Por que este código utiliza dois pipes, ao invés de um?
+`Para que não haja necessidade de sobrescrever o sinal enviado/recebido do pai/filho para o filho/pai, fazendo-os ficar realizando seus testes simultaneamente/paralelamente e sem interrupções.`
+
 
 (d) Ao final da execução destes processos, qual é a última linha escrita no terminal?
+`O valor recebido pela variável cur_val antes da mesma se tornar zero.`
