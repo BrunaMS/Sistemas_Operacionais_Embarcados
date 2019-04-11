@@ -217,8 +217,9 @@ int main (int argc, char *argv[])
 
 **8. Crie uma função que retorna a quantidade de caracteres em uma string, usando o seguinte protótipo: int Num_Caracs(char *string); Salve-a em um arquivo separado chamado 'num_caracs.c'. Salve o protótipo em um arquivo chamado 'num_caracs.h'. Compile 'num_caracs.c' para gerar o objeto 'num_caracs.o'.**
 
-```C
 main.c:
+
+```C
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -286,13 +287,22 @@ int main (int argc, char **argv)
 	}
 }
 ```
-
+```C
+num_caracs: main.o num_caracs.o
+	gcc $(CFLAGS) -o num_caracs main.o num_caracs.o
+main.o: main.c num_caracs.h
+	gcc $(CFLAGS) -c main.c
+num_caracs.o: num_caracs.c num_caracs.h
+	gcc $(CFLAGS) -c num_caracs.c
+clean:
+	rm -f *.o num_caracs
+```
 **11. Re-utilize o objeto criado na questão 8 para criar um código que imprime o total de caracteres nos argumentos de entrada. Por exemplo, considerando que o código criado recebeu o nome de 'ola_num_caracs_2':**
 ```bash
 $ ./ola_num_caracs_2 Eu Mesmo
 $ Total de caracteres de entrada: 25
 ```
-**12. Crie um Makefile para a questão anterior.**
+
 
 ```C
 #include <stdio.h>
@@ -311,4 +321,16 @@ int main (int argc, char **argv)
 	}
 	printf("Número de caracteres: %d\n", qntd);
 }
+```
+**12. Crie um Makefile para a questão anterior.**
+
+```C
+num_caracs_2: main.o num_caracs_2.o
+	gcc $(CFLAGS) -o num_caracs_2 main.o num_caracs_2.o
+main.o: main.c num_caracs_2.h
+	gcc $(CFLAGS) -c main.c
+num_caracs_2.o: num_caracs_2.c num_caracs_2.h
+	gcc $(CFLAGS) -c num_caracs_2.c
+clean:
+	rm -f *.o num_caracs_2
 ```
