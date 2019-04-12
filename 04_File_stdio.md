@@ -216,7 +216,7 @@ int main(int argc, const char * argv[])
 }
 ```
 7. Crie um código em C que conta a ocorrência de uma palavra-chave em um arquivo-texto, e escreve o resultado no terminal. Reaproveite as funções já criadas nas questões anteriores. Por exemplo, considerando que o código criado recebeu o nome de 'busca_e_conta':
-
+`Right`
 ```bash
 $ echo Ola mundo cruel! Ola universo ingrato! > ola.txt
 $ ./busca_e_conta Ola ola.txt
