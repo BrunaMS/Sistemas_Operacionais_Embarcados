@@ -5,29 +5,27 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-struct char_print_parms
-	{
-	int count; 
-	};
 
-void* char_print (void* parameters) {
-	struct char_print_parms* p = (struct char_print_parms*) parameters;
-	int i;
-	for (i = 1; i <= 10; i++)
-	{
-		p->count = i;
-		printf("%d\n", p->count);
+int count; 
+
+void* char_print () 
+{
+	printf("%d\n", count);
+	if(count<10)
 		sleep(1);
-	}
 	return NULL;
 }
+
 int main ()
 {
 	pthread_t thread1_id;
-	struct char_print_parms thread1_args;
 	printf("Pressione CTRL+C para finalizar o programa.\n");
-	pthread_create (&thread1_id, NULL, &char_print, &thread1_args);
-	pthread_join (thread1_id, NULL);
+	for(count=1;count<=10;count++)
+	{
+		pthread_create (&thread1_id, NULL, &char_print, NULL);
+		pthread_join (thread1_id, NULL);
+	}
+	sleep(1);
 	return 0;
 }
 ```
