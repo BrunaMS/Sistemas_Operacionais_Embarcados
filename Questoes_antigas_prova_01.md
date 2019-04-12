@@ -174,7 +174,7 @@ int main()
 `A cada loop FOR é criado um novo pipe, ou seja, o 1º compartilha 1, o 2º compartilha 2 e o 3º compartilha 3 pipes diferentes.`
 
 (d) Quantos processos enxergarão o sinal `SIGINT`? Justifique sua resposta.
-`Apenas o pai, ou seja, 1. Isso devido ao fato de o sinal estar antes da criação do fork.`
+`TODOS os processos criados. Isso se deve ao fato de o sinal ter sido criado antes do fork, fazendo com que os demais processos "nascessem" já com o sinal definido.`
 
 4. Considerando o código abaixo, responda:
 
