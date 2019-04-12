@@ -7,7 +7,7 @@ int fd[2];
 pipe(fd);
 pid = fork();
 ```
-`Apenas 1 pipe, devido ao fato de a criação do pipe ter sido realizada antes do do fork, fazendo com que esse pipe não possa ser utilizado pelo mesmo.`
+`Apenas 1 pipe, devido ao fato de a criação do pipe ter sido realizada antes do do fork, fazendo com que não seja criado outro pipe pelo mesmo.`
 
 (b)
 ```C
@@ -17,7 +17,7 @@ pid = fork();
 pipe(fd);
 ```
 
-` 2 pipes, que serão dividido em 2 partes: escrita e leitura, que poderão ser realizados por 2 processos diferentes (pai e filho).Isso devido ao fato de o "fork" estar antes do pipe, disponibilizando-o também para o processo-filho realizar.`
+` 2 pipes, que serão dividido em 2 partes: escrita e leitura, que poderão ser realizados por 2 processos diferentes (pai e filho).Isso devido ao fato de o "fork" estar antes do pipe, fazendo tanto o processo-filho  quando o pai gerá-lo.`
 
 2. Apresente mais cinco sinais importantes do ambiente Unix, além do `SIGSEGV`, `SIGUSR1`, `SIGUSR2`, `SIGALRM` e `SIGINT`. Quais são suas características e utilidades?
 
