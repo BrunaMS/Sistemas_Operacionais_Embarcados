@@ -32,7 +32,7 @@ int main (int argc, char** argv)
 ```
 
 
-`3 Threads, com as duas threads criadas funcionando paralelamente. Essa característica é definida`
+`3 Threads, com as duas threads criadas funcionando paralelamente: A thread principal e as duas demais criadas no desenvolver do programa.`
 
 
 (b)
