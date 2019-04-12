@@ -90,23 +90,7 @@ struct char_print_parms
 	long int v[MAX];  
 	long int max;
 	};
-/*
-struct char_print_parms_2
-	{
-	long int v_2[12500]; 
-	long int max_2;
-	};
-struct char_print_parms_3
-	{
-	long int v_3[12500]; 
-	long int max_3;
-	};
-struct char_print_parms_4
-	{
-	long int v_4[12500]; 
-	long int max_4;
-	};
-*/
+
 struct max_parms
 	{	
 	long int max[4];
