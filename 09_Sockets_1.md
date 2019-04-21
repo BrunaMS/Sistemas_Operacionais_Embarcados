@@ -33,6 +33,9 @@
 
 É uma forma de identificação do meio que será usado para que o socket invie e receba mensagens (IPPROTO_TCP, IPPROTO_UDP ou 0 para protocolo padrão).
 
+Define o local onde os parâmetros são passados.
+
+
 **Ex.:** TCP/IP, IPV4 (Família PF_INET), Comunicação local e Endereço de arquivos (Família PF_UNIX/PF_LOCAL) ou protocolos da Digital Equipment Corporation (Família PF_DECnet).
 
 
