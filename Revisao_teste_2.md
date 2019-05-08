@@ -17,7 +17,7 @@ int meio_periodo = MAX_MEIO_PERIODO;
 void muda_freq()
 {
   meio_periodo /= 2;
-  if(meio_periodo<MIN_MEIO_PERIODO);
+  if(meio_periodo<(MIN_MEIO_PERIODO-1));
     meio_periodo = MAX_MEIO_PERIODO;
 }
 int main(void)
