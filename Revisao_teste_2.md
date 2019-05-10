@@ -51,3 +51,17 @@ int main(void)
     }
 }
 ```
+**Revisão 10/05/2019**
+
+- Questão 1
+
+1. Configurar UART
+2. Zerar soma total e contador
+3. Ler 2 bytes UART
+4. concatenar bytes
+5. Somar leitura à soma total
+6. Incrementar contador
+7. Voltar a 3. se contador `< 100`
+8. Dividir soma total por 100
+9. Mostrar resultado na tela
+10. Voltar para 2.
