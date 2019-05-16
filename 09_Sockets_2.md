@@ -1,89 +1,63 @@
 1. Crie dois programas em C para criar um cliente e um servidor. Faça com que o cliente envie os valores 1, 2, 3, 4, 5, 6, 7, 8, 9 e 10 para o servidor, com intervalos de 1 segundo entre cada envio. Depois de o cliente enviar o número 10, ele aguarda 1 segundo e termina a execução. O servidor escreve na tela cada valor recebido, e quando ele receber o valor 10, ele termina a execução.
 `Feito`
 ```C
-			// Servidor Local
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
-#include <signal.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-
-char socket_name[]="socket";
-int socket_id;
-void sigint_handler(int signum);
-void print_client_message(int client_socket);
-void end_server(void);
+#include <unistd.h>
 
 int main (int argc, char* const argv[])
 {
-	struct sockaddr socket_struct;
-	int count=1;
+	char *socket_name;
+	char *mensagem;
 
-	// Definindo o tratamento de SIGINT
-	//signal(SIGINT, sigint_handler);
-	
-	// Abrindo o socket local
-	socket_id = socket(PF_LOCAL, SOCK_STREAM, 0);
+	int socket_id;
+	struct sockaddr name;
+	int length;
 
-	// Ligando o socket ao endereco local "socket_name"
-	socket_struct.sa_family = AF_LOCAL;
-	strcpy(socket_struct.sa_data, socket_name);
-	bind(socket_id, &socket_struct, sizeof(socket_struct));
-	
-	// Tornando o socket passivo (para virar um servidor)
-	listen(socket_id, 10);
-
-	while(count<=10)
+	if (argc < 3)
 	{
-		struct sockaddr cliente;
-		int socket_id_cliente;
-		socklen_t cliente_len;
-		
-		// Aguardando a conexao de um cliente
-		socket_id_cliente = accept(socket_id, &cliente, &cliente_len);
-
-		// Obtendo a informacao transmitida pelo cliente
-		write(socket_id_cliente, &count, sizeof(int));
-
-		print_client_message(socket_id_cliente);
-		count++;
-		sleep(1);
-		// Fechando a conexao com o cliente
-		close(socket_id_cliente);
-
-	}
-	return 0;
-}
-
-void sigint_handler(int signum)
-{
-	fprintf(stderr, "\nRecebido o sinal CTRL+C... vamos desligar o servidor!\n");
-	end_server();
-}
-
-void print_client_message(int client_socket)
-{
-	int count;	
-	//fprintf(stderr, "\nMensagem enviada pelo cliente tem ");
-	read(client_socket, &count, sizeof (int));
-	printf("Contador = %d\n\n", count);
-	if(count==10)
-	{
-		sleep(1);
+		puts("   Este programa cria um cliente que se comunica");
+		puts("   a um servidor local no caminho especificado");
+		puts("   pelo usuario. Para permitir que o cliente comunique-se");
+		puts("   com este servidor, o servidor deve ser");
+		puts("   executado inicialmente com um caminho definido,");
+		puts("   e o cliente devera ser executado em outra");
+		puts("   janela ou em outra aba do terminal, utilizando");
+		puts("   o mesmo caminho. O servidor escreve na tela");
+		puts("   todo texto enviado pelo cliente. Se o cliente");
+		puts("   transmitir o texto \"sair\", o servidor se");
+		puts("   encerra. Se o usuario pressionar CTRL-C para");
+		puts("   o servidor, ele tambem se encerra.");
+		puts("   Modo de Uso:");
+		printf("      %s <caminho_do_socket> <mensagem>\n", argv[0]);
+		printf("   Exemplo: %s /tmp/socket1 \"Ola socket\"\n", argv[0]);
 		exit(1);
-	}	
+	}
+	socket_name = argv[1];
+	mensagem = 0;
 
-}
-
-void end_server(void)
-{
-	// Apagando "socket_name" do sistema
-	unlink(socket_name);
+	// Abrindo o socket local
+	socket_id = socket(PF_LOCAL, SOCK_STREAM,0);
+	
+	//Conectando o socket ao servidor no endereco local "socket_name"
+	name.sa_family = AF_LOCAL;
+	strcpy(name.sa_data, socket_name);
+	connect(socket_id, &name, sizeof(name));
+	
+	for(mensagem=1;mensagem<=10;mensagem++)
+	{
+		// Mandando mensagem ao servidor
+		length = 1;
+		write(socket_id, &length, sizeof(int));
+		write(socket_id, mensagem, length);
+		sleep(1000);
+	}
 	// Fechando o socket local
 	close(socket_id);
-	exit(0);
+	return 0;
 }
 ```
 
