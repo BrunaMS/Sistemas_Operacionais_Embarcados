@@ -29,9 +29,8 @@ Não precisa de avisos porque o próprio MSP já envia os bits de início e tér
 
 3. Considere o caso em que a Raspberry Pi deve receber leituras analógico/digitais de um MSP430, que a comunicação entre os dois seja SPI, e que o MSP430 seja o escravo. É tecnicamente possível que o MSP430 mande os resultados da conversão A/D a qualquer hora, ou ele deve aguardar a Raspberry Pi fazer um pedido ao MSP430? Por quê?
 ```
-Deve aguardar, primprincipalmente por que ele é sincrono, o que faz com que ele tenha que esperar o sinal de clock para transmitir a informação.
+Deve aguardar, principalmente por que ele é sincrono, o que faz com que ele tenha que esperar o sinal de clock para transmitir a informação.
 ``` 
-
 
 4. Se o Raspberry Pi tiver de se comunicar com dois dispositivos via UART, como executar a comunicação com o segundo dispositivo?
 ```
